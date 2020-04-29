@@ -21,7 +21,7 @@ for teamId in listA1:
     driver.get(thorenv + str(teamId))
 
     #Navigate to school Page
-    navToSchool = driver.find_element_by_xpath("//*[@id='aspnetForm']/div[3]/table/tbody/tr[1]/td[2]/h2[1]/a")
+    navToSchool = driver.find_element_by_xpath("//a[contains(@href,'/school/')]")
     navToSchool.click()
 
     #Check if business unit is elite
@@ -32,7 +32,7 @@ for teamId in listA1:
 
     elif(whatIsIt != "Elite"):
         #Check if they have a sportscode licens
-        navToSportsCode = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div/div[2]/div[1]/ul/li[8]/a")
+        navToSportsCode = driver.find_element_by_xpath("//a[contains(@href,'/admin/sportscode/licenses/')]")
         navToSportsCode.click()
         time.sleep(1)
         doTheyHaveASportsCodeLicenses = driver.find_element_by_xpath("/html/body/div[2]/div/div/div[2][contains(string(), '(this School has no Licenses)')]")
