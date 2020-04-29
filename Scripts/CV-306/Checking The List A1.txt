@@ -1,0 +1,7 @@
+Checking The List A1
+Time at Run: 2020-04-28 22:30:19.751599
+FAILED! Team ID = 332058
+Passed Count 0
+Error Count 1
+Failed Team Id's, 332058 Elite School
+Completed: 0/879

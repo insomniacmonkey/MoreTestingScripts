@@ -33,7 +33,7 @@ def errorState(ListNumber,teamId,theToggle,totalTeams):
     #Increase failed count, total ran so far, total passed, current progress, and the list of failed ids.
     itFailed = ("FAILED! Team ID = " + str(teamId) + newLine)
     errorCount = errorCount + 1
-    badTeamIds = badTeamIds + ", " +  teamId + " " + theToggle
+    badTeamIds = badTeamIds + ", " +  str(teamId) + " " + theToggle
     totalPassedCount = ("Passed Count " + str(passed) + newLine)
     totalErrorCount =("Error Count " +  str(errorCount) + newLine)
     failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
