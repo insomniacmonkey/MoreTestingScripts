@@ -1,41 +1,19 @@
 from selenium import webdriver
-import time
-import datetime
 from selenium.webdriver.common.keys import Keys
 from listA import *
 from password import *
-
-
-passed = 0
-errorCount = 0
-badTeamIds = ""
-MTL = "Checking The List "
-txt = ".txt"
-newLine = "\n"
-now = datetime.datetime.now()
-
-def append_new_line(file_name, text_to_append):
-    with open(file_name, "w") as file_object:
-        file_object.writelines(text_to_append)
+from functions import *
 
 
 
 ListNumber = "A1"
-totalNumber = len(listA1)
-for i in listA1:
-    true = "True"
-    runningListName = (MTL + ListNumber + newLine)
-    totalRan = passed + errorCount
-    currentTime = ("Time at Run: " + str(now) + newLine)
-    itPassed = ("PASSED! Team ID = " + str(i) + newLine)
-    itFailed = ("FAILED! Team ID = " + str(i) + newLine)
-    totalPassedCount = ("Passed Count " + str(passed) + newLine)
-    totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-    failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-    progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
+totalTeams = str(len(listA1))
+
+for teamId in listA1:
+
     ##login
     driver = webdriver.Chrome()
-    driver.get(thorenv + str(i))
+    driver.get(thorenv + str(teamId))
     time.sleep(1)
     inputElement = driver.find_element_by_id("email")
     inputElement.send_keys(myEmail)
@@ -43,67 +21,25 @@ for i in listA1:
     inputElement.send_keys(password)
     inputElement.submit()
     ##load Admin Page
-    driver.get(thorenv + str(i))
+    driver.get(thorenv + str(teamId))
     time.sleep(1)
+
 
     ## Check for elite toggle = true
     eliteToggle = driver.find_element_by_xpath("//*[@id='isEliteTeam']").is_selected()
     if (str(eliteToggle) == true):
-        errorCount = errorCount + 1
-        badTeamIds = badTeamIds + ", " +  str(i) + " eliteToggleTrue"
-        totalRan = passed + errorCount
-        totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-        progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-        failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-        textToWrite = [
-        runningListName,
-        currentTime,
-        itFailed,
-        totalPassedCount,
-        totalErrorCount,
-        failedTeamIds,
-        progress]
-        append_new_line((MTL + ListNumber + txt),textToWrite)
-        print (runningListName)
-        print (currentTime)
-        print (itFailed)
-        print (totalPassedCount)
-        print (totalErrorCount)
-        print (failedTeamIds)
-        print (progress)
-        print ("something went wrong")
+        errorState(ListNumber,str(teamId),"EliteToggleIsOn",totalTeams)
 
     elif (str(eliteToggle) != true):
         ##Load Team Priv Page
-        driver.get(teamPrivs + str(i))
+        driver.get(teamPrivs + str(teamId))
 
         ##Check for League Exchange toggle
         exchangesTrue = driver.find_element_by_xpath("//*[@id='chk4']").is_selected()
 
         if (str(exchangesTrue) == true):
-            errorCount = errorCount + 1
-            badTeamIds = badTeamIds + ", " +  str(i) + " exchangesTRUE"
-            totalRan = passed + errorCount
-            totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-            progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-            failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-            textToWrite = [
-            runningListName,
-            currentTime,
-            itFailed,
-            totalPassedCount,
-            totalErrorCount,
-            failedTeamIds,
-            progress]
-            append_new_line((MTL + ListNumber + txt),textToWrite)
-            print (runningListName)
-            print (currentTime)
-            print (itFailed)
-            print (totalPassedCount)
-            print (totalErrorCount)
-            print (failedTeamIds)
-            print (progress)
-            print ("something went wrong")
+            errorState(ListNumber,str(teamId),"ExchangesIsOn",totalTeams)
+
 
         elif (str(exchangesTrue) != true):
             ##Check for SportsCode toggles
@@ -118,256 +54,35 @@ for i in listA1:
             V3MultiAngleSportscodeZips = driver.find_element_by_xpath("//*[@id='chk556']").is_selected()
 
             if (str(DownloadHudlTaggingDataAsSportscodeXml) == true):
-                errorCount = errorCount + 1
-                badTeamIds = badTeamIds + ", " +  str(i) + " DownloadHudlTaggingDataAsSportscodeXml"
-                totalRan = passed + errorCount
-                totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-                failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itFailed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-                print (runningListName)
-                print (currentTime)
-                print (itFailed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("something went wrong")
+                errorState(ListNumber,str(teamId),"DownloadHudlTaggingDataAsSportscodeXml",totalTeams)
 
             elif (str(HudlSportscodeVideoDownload) == true):
-                errorCount = errorCount + 1
-                badTeamIds = badTeamIds + ", " +  str(i) + " HudlSportscodeVideoDownload"
-                totalRan = passed + errorCount
-                totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-                failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itFailed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-                print (runningListName)
-                print (currentTime)
-                print (itFailed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("something went wrong")
+                errorState(ListNumber,str(teamId),"HudlSportscodeVideoDownload",totalTeams)
 
             elif (str(SportscodeBridge) == true):
-                errorCount = errorCount + 1
-                badTeamIds = badTeamIds + ", " +  str(i) + " SportscodeBridge"
-                totalRan = passed + errorCount
-                totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-                failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itFailed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-                print (runningListName)
-                print (currentTime)
-                print (itFailed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("something went wrong")
+                errorState(ListNumber,str(teamId),"SportscodeBridge",totalTeams)
 
             elif (str(SportscodeDownloadXml) == true):
-                errorCount = errorCount + 1
-                badTeamIds = badTeamIds + ", " +  str(i) + " SportscodeDownloadXml"
-                totalRan = passed + errorCount
-                totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-                failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itFailed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-                print (runningListName)
-                print (currentTime)
-                print (itFailed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("something went wrong")
+                errorState(ListNumber,str(teamId),"SportscodeDownloadXml",totalTeams)
 
 
             elif (str(SportscodeRegistrationManagement) == true):
-                errorCount = errorCount + 1
-                badTeamIds = badTeamIds + ", " +  str(i) + " SportscodeRegistrationManagement"
-                totalRan = passed + errorCount
-                totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-                failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itFailed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-                print (runningListName)
-                print (currentTime)
-                print (itFailed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("something went wrong")
+                errorState(ListNumber,str(teamId),"SportscodeRegistrationManagement",totalTeams)
 
             elif (str(SportscodeUploadToPlaylist) == true):
-                errorCount = errorCount + 1
-                badTeamIds = badTeamIds + ", " +  str(i) + " SportscodeUploadToPlaylist"
-                totalRan = passed + errorCount
-                totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-                failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itFailed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-                print (runningListName)
-                print (currentTime)
-                print (itFailed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("something went wrong")
+                errorState(ListNumber,str(teamId),"SportscodeUploadToPlaylist",totalTeams)
 
             elif (str(SportscodeVideoSPA) == true):
-                errorCount = errorCount + 1
-                badTeamIds = badTeamIds + ", " +  str(i) + " SportscodeVideoSPA"
-                totalRan = passed + errorCount
-                totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-                failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itFailed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-                print (runningListName)
-                print (currentTime)
-                print (itFailed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("something went wrong")
+                errorState(ListNumber,str(teamId),"SportscodeVideoSPA",totalTeams)
 
             elif (str(SportscodeVideoSpaBeta) == true):
-                errorCount = errorCount + 1
-                badTeamIds = badTeamIds + ", " +  str(i) + " SportscodeVideoSpaBeta"
-                totalRan = passed + errorCount
-                totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-                failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itFailed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-                print (runningListName)
-                print (currentTime)
-                print (itFailed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("something went wrong")
+                errorState(ListNumber,str(teamId),"SportscodeVideoSpaBeta",totalTeams)
 
             elif (str(V3MultiAngleSportscodeZips) == true):
-                errorCount = errorCount + 1
-                badTeamIds = badTeamIds + ", " +  str(i) + " V3MultiAngleSportscodeZips"
-                totalRan = passed + errorCount
-                totalErrorCount =("Error Count " +  str(errorCount) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-                failedTeamIds =("Failed Team Id's" + str(badTeamIds) + newLine)
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itFailed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-                print (runningListName)
-                print (currentTime)
-                print (itFailed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("something went wrong")
+                errorState(ListNumber,str(teamId),"V3MultiAngleSportscodeZips",totalTeams)
 
 
             else:
-                passed = passed + 1
-                totalRan = passed + errorCount
-                totalPassedCount = ("Passed Count " + str(passed) + newLine)
-                progress = ("Completed: " + str(totalRan) + "/" + str(totalNumber) + newLine)
-
-                textToWrite = [
-                runningListName,
-                currentTime,
-                itPassed,
-                totalPassedCount,
-                totalErrorCount,
-                failedTeamIds,
-                progress]
-                append_new_line((MTL + ListNumber + txt),textToWrite)
-
-                print (runningListName)
-                print (currentTime)
-                print (itPassed)
-                print (totalPassedCount)
-                print (totalErrorCount)
-                print (failedTeamIds)
-                print (progress)
-                print ("Passed")
-
+                passingState(ListNumber,str(teamId),totalTeams)
 
     driver.close()
