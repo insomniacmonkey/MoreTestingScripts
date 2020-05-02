@@ -30,19 +30,20 @@ for teamId in listG1:
     if(whatIsIt != "Elite"):
         errorState(ListNumber,teamId,"Not an Elite School",totalTeams)
 
-    elif(whatIsIt == "Elite"):
+    elif(whatIsIt != "Elite"):
         #Check if they have a sportscode licens
         navToSportsCode = driver.find_element_by_xpath("//a[contains(@href,'/admin/sportscode/licenses/')]")
         navToSportsCode.click()
         time.sleep(1)
-        doTheyHaveASportsCodeLicenses = driver.find_element_by_xpath("/html/body/div[2]/div/div/div[2][contains(string(), '(this School has no Licenses)')]")
-        wellDoThey = doTheyHaveASportsCodeLicenses.text
+        try:
+            doTheyHaveASportsCodeLicenses = driver.find_element_by_xpath("/html/body/div[2]/div/div/div[2][contains(string(), '(this School has no Licenses)')]")
+            wellDoThey = doTheyHaveASportsCodeLicenses.text
 
-        if(wellDoThey == "(this School has no Licenses)"):
-            errorState(ListNumber,teamId,"does not have SportsCode Licenses",totalTeams)
+            if(wellDoThey == "(this School has no Licenses)"):
+                errorState(ListNumber,teamId,"does NOT have SportsCode Licenses",totalTeams)
+            continue
 
-        elif(wellDoThey != "(this School has no Licenses)"):
-            #TODO remove this before moving on to checking for league exchanges
+        except:
             passingState(ListNumber,teamId,totalTeams)
-        #TODO Check if they have league exchanges
+            
     driver.close()

@@ -35,14 +35,15 @@ for teamId in listC1:
         navToSportsCode = driver.find_element_by_xpath("//a[contains(@href,'/admin/sportscode/licenses/')]")
         navToSportsCode.click()
         time.sleep(1)
-        doTheyHaveASportsCodeLicenses = driver.find_element_by_xpath("/html/body/div[2]/div/div/div[2][contains(string(), '(this School has no Licenses)')]")
-        wellDoThey = doTheyHaveASportsCodeLicenses.text
+        try:
+            doTheyHaveASportsCodeLicenses = driver.find_element_by_xpath("/html/body/div[2]/div/div/div[2][contains(string(), '(this School has no Licenses)')]")
+            wellDoThey = doTheyHaveASportsCodeLicenses.text
 
-        if(wellDoThey == "(this School has no Licenses)"):
-            errorState(ListNumber,teamId,"does NOT have SportsCode Licenses",totalTeams)
-
-        elif(wellDoThey != "(this School has no Licenses)"):
-            #TODO remove this before moving on to checking for league exchanges
+            if(wellDoThey == "(this School has no Licenses)"):
+                errorState(ListNumber,teamId,"does NOT have SportsCode Licenses",totalTeams)
+            continue
+            
+        except:
             passingState(ListNumber,teamId,totalTeams)
-        #TODO Check if they have league exchanges
+
     driver.close()
