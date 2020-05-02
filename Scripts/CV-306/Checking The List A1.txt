@@ -1,7 +1,7 @@
 Checking The List A1
-Time at Run: 2020-04-28 23:05:36.160418
-PASSED! Team ID = 436335
-Passed Count 818
+Time at Run: 2020-05-02 01:57:14.171365
+PASSED! Team ID = 232940
+Passed Count 13
 Error Count 0
 Failed Team Id's
-Completed: 818/879
+Completed: 13/776

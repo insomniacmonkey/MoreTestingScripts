@@ -1,0 +1,7 @@
+Checking The List B4
+Time at Run: 2020-05-02 01:51:11.516289
+PASSED! Team ID = 95716
+Passed Count 34
+Error Count 0
+Failed Team Id's
+Completed: 34/702
