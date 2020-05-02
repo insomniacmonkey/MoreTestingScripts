@@ -1,7 +1,7 @@
 Checking The List B2
 Time at Run: 2020-05-02 01:50:32.898485
-PASSED! Team ID = 279003
-Passed Count 29
+PASSED! Team ID = 407455
+Passed Count 36
 Error Count 0
 Failed Team Id's
-Completed: 29/1151
+Completed: 36/1151
