@@ -1,7 +1,7 @@
 Checking The List C1
-Time at Run: 2020-05-02 20:14:28.627233
-FAILED! Team ID = 317831
-Passed Count 4
-Error Count 1
-Failed Team Id's, 317831 Couldn't Find Business Unit
-Completed: 4/221
+Time at Run: 2020-05-02 20:53:13.855273
+PASSED! Team ID = 380492
+Passed Count 221
+Error Count 0
+Failed Team Id's
+Completed: 221/221
