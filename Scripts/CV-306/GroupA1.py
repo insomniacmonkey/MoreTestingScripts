@@ -37,7 +37,6 @@ for teamId in listA1:
     try:
         isItAnEliteTeam = driver.find_element_by_class_name("business-unit")
         whatIsIt = isItAnEliteTeam.text
-        print("Business Unit: " + whatIsIt)
         if(whatIsIt == "Elite"):
             errorState(ListNumber,teamId,"Elite School",totalTeams)
             driver.close()
@@ -52,7 +51,7 @@ for teamId in listA1:
         continue
 
     try:
-        #Check if they have a sportscode licens
+        #Check if they have sportscode 
         navToSportsCode = driver.find_element_by_xpath("//a[contains(@href,'/admin/sportscode/licenses/')]")
         navToSportsCode.click()
         time.sleep(1)

@@ -20,6 +20,8 @@ for teamId in listC1:
     ##load Admin Page
     driver.get(thorenv + str(teamId))
 
+    #shouldn't be elite
+    #has sports code licenses
     try:
         #Navigate to school Page
         navToSchool = driver.find_element_by_xpath("//a[contains(@href,'/school/')]")
@@ -42,7 +44,7 @@ for teamId in listC1:
             continue
 
         else:
-            print("Not an Elite School " + "Business Unit: " + whatIsIt)
+            print("Not an Elite School")
 
     except:
         errorState(ListNumber,teamId,"Couldn't Find Business Unit",totalTeams)

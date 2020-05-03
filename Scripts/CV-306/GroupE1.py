@@ -37,7 +37,6 @@ for teamId in listE1:
     try:
         isItAnEliteTeam = driver.find_element_by_class_name("business-unit")
         whatIsIt = isItAnEliteTeam.text
-        print("Business Unit: " + whatIsIt)
         if(whatIsIt == "Elite"):
             print("Business Unit: " + whatIsIt)
 
