@@ -20,9 +20,16 @@ for teamId in listC1:
     ##load Admin Page
     driver.get(thorenv + str(teamId))
 
-    #Navigate to school Page
-    navToSchool = driver.find_element_by_xpath("//a[contains(@href,'/school/')]")
-    navToSchool.click()
+    try:
+        #Navigate to school Page
+        navToSchool = driver.find_element_by_xpath("//a[contains(@href,'/school/')]")
+        navToSchool.click()
+        print("Navigated to school page...")
+
+    except:
+        errorState(ListNumber,teamId,"Couldn't Navigate to school page",totalTeams)
+        driver.close()
+        continue
 
     #Check if business unit is elite
     try:
