@@ -1,7 +1,7 @@
 Checking The List F1
 Time at Run: 2020-05-04 10:31:56.120198
-PASSED! Team ID = 368161
-Passed Count 656
+PASSED! Team ID = 232532
+Passed Count 701
 Error Count 1
 Failed Team Id's, 226590 something was wrong on sportscode page
-Completed: 657/702
+Completed: 702/702

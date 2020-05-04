@@ -1,7 +1,7 @@
 Checking The List B3
 Time at Run: 2020-05-04 10:31:11.445143
-PASSED! Team ID = 428886
-Passed Count 641
-Error Count 0
-Failed Team Id's
-Completed: 641/1365
+PASSED! Team ID = 406090
+Passed Count 1053
+Error Count 3
+Failed Team Id's, 417881 something was wrong on sportscode page, 346828 Couldn't Find Business Unit, 284571 something was wrong on sportscode page
+Completed: 1056/1365

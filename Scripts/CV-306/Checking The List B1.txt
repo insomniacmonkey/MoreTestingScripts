@@ -1,7 +1,7 @@
 Checking The List B1
 Time at Run: 2020-05-04 10:31:01.100616
-PASSED! Team ID = 328440
-Passed Count 642
+PASSED! Team ID = 351170
+Passed Count 933
 Error Count 1
 Failed Team Id's, 426943 Couldn't Find Business Unit
-Completed: 643/934
+Completed: 934/934
