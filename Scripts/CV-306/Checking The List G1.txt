@@ -1,7 +1,7 @@
 Checking The List G1
 Time at Run: 2020-05-04 10:32:03.471701
-PASSED! Team ID = 469424
-Passed Count 10
+PASSED! Team ID = 228767
+Passed Count 649
 Error Count 0
 Failed Team Id's
-Completed: 10/1135
+Completed: 649/1135

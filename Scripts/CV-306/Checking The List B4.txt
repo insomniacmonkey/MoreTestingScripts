@@ -1,7 +1,7 @@
 Checking The List B4
 Time at Run: 2020-05-04 10:31:17.426350
-PASSED! Team ID = 429180
-Passed Count 12
-Error Count 0
-Failed Team Id's
-Completed: 12/1266
+PASSED! Team ID = 428892
+Passed Count 646
+Error Count 1
+Failed Team Id's, 232503 something was wrong on sportscode page
+Completed: 647/1266
