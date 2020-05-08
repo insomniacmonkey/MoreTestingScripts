@@ -29,6 +29,7 @@ expectedTimeString = str(int(float(expectedTime)))
 
 
 #Write a while loop that checks if current time = duration and continually update the drift ammount.
+#TODO the current time and play time will be different because of drift... we need a way to confirm that they should match. 
 while (currentTimeString != expectedTimeString):
     currentTime = driver.execute_script("return document.getElementById('player-current-time').value;")
     currentTimeString = str(int(float(currentTime)))
@@ -40,6 +41,8 @@ while (currentTimeString != expectedTimeString):
     print ("Current Time: " + currentTimeString + " in Seconds")
     print ("Current Drift: " + str(float(msToSeconds)) + " in Seconds")
     time.sleep(60)
+
+
 
 print("Finished!")
 print ("Final Time: " + currentTimeString + " in Seconds")
