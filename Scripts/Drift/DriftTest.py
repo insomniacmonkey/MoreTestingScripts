@@ -19,12 +19,9 @@ time.sleep(3)
 #Select 2x speed
 setTheSpeed = driver.find_element_by_xpath("//*[@id='player-playbackrate']/option[5]").click()
 
-
+#initialzing values so the first while loop runs
 currentTimeString = ""
-print(currentTimeString + "first time being set not in loop 1")
-
 currentTimeSecondCheckString = "2"
-print(currentTimeSecondCheckString +  "first time being set not in loop 1")
 
 driftTime = driver.execute_script("return document.getElementById('drift').value;")
 msToSeconds = float(driftTime) / 1000
@@ -47,11 +44,7 @@ def secondTimeCheck():
 #TODO the current time and play time will be different because of drift... we need a way to confirm that they should match.
 while currentTimeString != currentTimeSecondCheckString:
     firstTimeCheck()
-    print(currentTimeString)
-
     secondTimeCheck()
-    print(currentTimeSecondCheckString)
-
     #Get drift and convert from ms to seconds
     driftTime = driver.execute_script("return document.getElementById('drift').value;")
     msToSeconds = float(driftTime) / 1000
