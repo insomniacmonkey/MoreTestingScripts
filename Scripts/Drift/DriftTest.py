@@ -20,44 +20,68 @@ time.sleep(3)
 setTheSpeed = driver.find_element_by_xpath("//*[@id='player-playbackrate']/option[5]").click()
 
 #initialzing values so the first while loop runs
+currentTime = 0
 currentTimeString = ""
+currentTimeSecondCheck = 0
 currentTimeSecondCheckString = "2"
-
-driftTime = driver.execute_script("return document.getElementById('drift').value;")
-msToSeconds = float(driftTime) / 1000
+driftTime = 0
+msToSeconds = 0
+expectedDuration = int(float(driver.execute_script("return document.getElementById('player-expected-duration').value;")))
 #Get current Time
 def firstTimeCheck():
     time.sleep(1)
+    global currentTime
     global currentTimeString
-    currentTime = driver.execute_script("return document.getElementById('player-current-time').value;")
-    currentTimeString = str(int(float(currentTime)))
-    print(currentTimeString)
+    currentTime = int(float(driver.execute_script("return document.getElementById('player-current-time').value;")))
+    currentTimeString = str(currentTime)
 
 def secondTimeCheck():
     time.sleep(3)
+    global currentTimeSecondCheck
     global currentTimeSecondCheckString
-    currentTimeSecondCheck = driver.execute_script("return document.getElementById('player-current-time').value;")
-    currentTimeSecondCheckString = str(int(float(currentTimeSecondCheck)))
-    print(currentTimeSecondCheckString)
+    currentTimeSecondCheck = int(float(driver.execute_script("return document.getElementById('player-current-time').value;")))
+    currentTimeSecondCheckString = str(currentTimeSecondCheck)
+
 
 #Write a while loop that checks if current time = duration and continually update the drift ammount.
 #TODO the current time and play time will be different because of drift... we need a way to confirm that they should match.
+#TODO log
 while currentTimeString != currentTimeSecondCheckString:
+    #get the duration
     firstTimeCheck()
     secondTimeCheck()
     #Get drift and convert from ms to seconds
-    driftTime = driver.execute_script("return document.getElementById('drift').value;")
-    msToSeconds = float(driftTime) / 1000
+    driftTime = float(driver.execute_script("return document.getElementById('drift').value;"))
+    msToSeconds = str(round(float(driftTime / 1000),2))
 
-    print ("Current Time: " + str(currentTimeString) + " in Seconds")
-    print ("Current Drift: " + str(float(msToSeconds)) + " in Seconds")
+    percentComplete = round(float(currentTimeSecondCheck / expectedDuration),2) * 100
+    print ("Current Time: " + currentTimeString + " Seconds")
+    print ("Percent Complete: " + str(percentComplete) + "%")
+    print ("Current Drift: " + msToSeconds + "  Seconds")
+    print ("------------------------------")
     time.sleep(5)
 
 print("Finished!")
-print ("Final Time: " + currentTimeString + " in Seconds")
-print ("Final Drift: " + str(float(msToSeconds)) + " in Seconds")
+#log a message depending on playback completion (maybe change this to ammount of drift? or ammount of drift compared to total video length)
+print ("Percent Complete: " + str(percentComplete) + "%")
+if percentComplete <= 80:
+    print("CRITICAL FAILURE!")
+elif percentComplete <= 90:
+    print("WARNING!")
+elif percentComplete <= 98:
+    print("GOOD!")
+elif percentComplete <= 100:
+    print("GREAT")
+elif percentComplete <= 101:
+    print("CRITICAL FAILURE!")
+print ("Final Time: " + currentTimeString + " Seconds")
+print ("Expected Duration: " + str(expectedDuration))
+print ("Final Drift: " + msToSeconds + " Seconds")
+
 
 #TODO: print/write out drift difference to a file.
 
 #TODO: decide if we want to wrap it all in a for loop to test multiple videos
+
+
 driver.close()
