@@ -61,6 +61,8 @@ while currentTimeString != currentTimeSecondCheckString:
     print ("------------------------------")
     time.sleep(5)
 
+#add timeout for while loop
+
 print("Finished!")
 #log a message depending on playback completion (maybe change this to ammount of drift? or ammount of drift compared to total video length)
 print ("Percent Complete: " + str(percentComplete) + "%")
