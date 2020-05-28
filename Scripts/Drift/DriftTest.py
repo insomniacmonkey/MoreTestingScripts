@@ -23,6 +23,7 @@ def secondTimeCheck():
     currentTimeSecondCheck = int(float(driver.execute_script("return document.getElementById('player-current-time').value;")))
     currentTimeSecondCheckString = str(currentTimeSecondCheck)
 
+#TODO Change this to an output that makes sense for capturing how bad the drift is, what file was run, etc.
 def outputFinalResults():
     global count
     print("Finished Run Number: " + str(count))
@@ -43,9 +44,6 @@ def outputFinalResults():
     print ("Final Drift: " + msToSeconds + " Seconds")
     print ("------------------------------")
 
-#Write a while loop that checks if current time = duration and continually update the drift ammount.
-#TODO the current time and play time will be different because of drift... we need a way to confirm that they should match.
-#TODO log
 for videoSrc in url:
     driver = webdriver.Chrome()
     driver.get(thorenv)
@@ -70,6 +68,8 @@ for videoSrc in url:
     msToSeconds = 0
     expectedDuration = int(float(driver.execute_script("return document.getElementById('player-expected-duration').value;")))
 
+    #Continue to loop through until the video stops playing. 
+    #TODO Make this more redundent incase the video buffers/freezes
     while currentTimeString != currentTimeSecondCheckString:
         #get the duration
         firstTimeCheck()
