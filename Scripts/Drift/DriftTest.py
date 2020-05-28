@@ -46,12 +46,11 @@ def outputFinalResults():
     print ("------------------------------")
     
     #Output We are saving
-    row_contents = [videoSrc,msToSeconds,str(expectedDuration)]
+    row_contents = [str(now),videoSrc,msToSeconds,str(expectedDuration)]
     
     # Append a list as new line to an old csv file
     append_list_as_row('DriftOutput.csv', row_contents)
 
-#TODO export to csv
 def append_list_as_row(file_name, list_of_elem):
     # Open file in append mode
     with open(file_name, 'a+', newline='') as write_obj:
@@ -101,5 +100,6 @@ for videoSrc in url:
         print ("Current Drift: " + msToSeconds + "  Seconds")
         print ("------------------------------")
         time.sleep(5)
+    now = datetime.datetime.now()
     outputFinalResults()
     driver.close()
