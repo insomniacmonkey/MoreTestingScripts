@@ -28,25 +28,14 @@ def secondTimeCheck():
 def outputFinalResults():
     global count
     print("Finished Run Number: " + str(count))
-    #log a message depending on playback completion (maybe change this to ammount of drift? or ammount of drift compared to total video length)
-    print ("Percent Complete: " + str(percentComplete) + "%")
-    if percentComplete <= 80:
-        print("CRITICAL FAILURE!")
-    elif percentComplete <= 90:
-        print("WARNING!")
-    elif percentComplete <= 98:
-        print("GOOD!")
-    elif percentComplete <= 100:
-        print("GREAT")
-    elif percentComplete <= 101:
-        print("CRITICAL FAILURE!")
+    
     print ("Final Time: " + currentTimeString + " Seconds")
     print ("Expected Duration: " + str(expectedDuration))
     print ("Final Drift: " + msToSeconds + " Seconds")
     print ("------------------------------")
     
     #Output We are saving
-    row_contents = [str(now),videoSrc,msToSeconds,str(expectedDuration)]
+    row_contents = [str(now),videoSrc[0],msToSeconds,str(expectedDuration),videoSrc[1],videoSrc[2],videoSrc[3]]
     
     # Append a list as new line to an old csv file
     append_list_as_row('DriftOutput.csv', row_contents)
@@ -67,7 +56,7 @@ for videoSrc in url:
     #Load stream info
     inputElement = driver.find_element_by_xpath("//*[@id='player-stream-src']")
     inputElement.clear()
-    inputElement.send_keys(videoSrc)
+    inputElement.send_keys(videoSrc[0])
     submitButton = driver.find_element_by_id("player-stream-load").click()
     time.sleep(5)
 
