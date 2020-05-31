@@ -41,10 +41,8 @@ def outputFinalResults():
     print ("Expected Duration: " + str(expectedDuration))
     print ("Final Drift: " + totalDriftAmmount + " Seconds")
     print ("------------------------------")
-    
     #Output We are saving
     row_contents = [str(now),videoSrc[0],totalDriftAmmount,currentTimeString,str(expectedDuration),videoSrc[1],videoSrc[2],videoSrc[3]]
-    
     # Append a list as new line to an old csv file
     append_list_as_row('DriftOutput.csv', row_contents)
 
