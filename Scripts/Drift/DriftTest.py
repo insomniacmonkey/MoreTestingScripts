@@ -66,7 +66,7 @@ for videoSrc in url:
     inputElement.clear()
     inputElement.send_keys(videoSrc[0])
     submitButton = driver.find_element_by_id("player-stream-load").click()
-    time.sleep(1)
+    time.sleep(5)
 
     #Select 2x speed
     setTheSpeed = driver.find_element_by_xpath("//*[@id='player-playbackrate']/option[5]").click()
