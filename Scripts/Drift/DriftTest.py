@@ -15,23 +15,23 @@ def firstTimeCheck():
     global currentTime
     global currentTimeString
     currentTime = driver.execute_script("return document.getElementById('player-current-time').value;")
-    #Makes currentTime resilent if the page hasn't fished loading when it checks for the time. 
+    #Makes currentTime resilient if the page hasn't finished loading when it checks for the time.
     if currentTime == '':
-        currentTime = 0
+       currentTime = 0
     else:
         currentTime = int(float(currentTime))
-    currentTimeString = str(currentTime)
+        currentTimeString = str(currentTime)
 
 def secondTimeCheck():
     time.sleep(3)
     global currentTimeSecondCheck
     global currentTimeSecondCheckString
-    currentTimeSecondCheck = driver.execute_script("return document.getElementById('player-current-time').value;") 
+    currentTimeSecondCheck = driver.execute_script("return document.getElementById('player-current-time').value;")
     if currentTimeSecondCheck == '':
-        currentTimeSecondCheck = 0
+       currentTimeSecondCheck = 0
     else:
         currentTimeSecondCheck = int(float(currentTimeSecondCheck))
-    currentTimeSecondCheckString = str(currentTimeSecondCheck)
+        currentTimeSecondCheckString = str(currentTimeSecondCheck)
 
 #TODO Change this to an output that makes sense for capturing how bad the drift is, what file was run, etc.
 def outputFinalResults():
@@ -90,14 +90,19 @@ for videoSrc in url:
             driftTime = 0
         else:
             driftTime = float(driftTime)
-        totalDriftAmmount = str(round(float(driftTime / 1000),2))
+            totalDriftAmmount = str(round(float(driftTime / 1000),2))
         expectedDuration = driver.execute_script("return document.getElementById('player-expected-duration').value;")
-        #Makes Expected duration resilent if the page hasn't fished loading when it checks for the time. 
+        #Makes Expected duration resilient if the page hasn't finished loading when it checks for the time. 
         if expectedDuration == '':
             expectedDuration = 0
         else:
-            expectedDuration = int(float(expectedDuration))
-        percentComplete = round(float(currentTimeSecondCheck / expectedDuration),2) * 100
+            try:
+                expectedDuration = int(float(expectedDuration))
+                percentComplete = round(float(currentTimeSecondCheck / expectedDuration),2) * 100
+            except ZeroDivisionError:
+                percentComplete = 0
+                print("We hit a ZeroDivisionError")
+
         print ("Current Run Number: " + str(count))
         print ("Current Time: " + currentTimeString + " Seconds")
         print ("Percent Complete: " + str(percentComplete) + "%")
