@@ -22,8 +22,8 @@ passwordField.submit()
 
 ##Load Video Spa Page
 driver.get(videoSpaURL)
-#let the player play for 12 seconds. This has to be a number that doesn't have a "0" in it due to image text conversion below. 
-time.sleep(12)
+#let the player play for 15 seconds. This has to be a number that doesn't have a "0" in it due to image text conversion below. 
+time.sleep(15)
 #pause player
 pauseButton = driver.find_element_by_xpath("//*[@data-qa-id='vi-controls-playpause']")
 pauseButton.click()
@@ -32,7 +32,7 @@ playTime = driver.find_element_by_xpath("//*[@data-qa-id='player-time-label']")
 getPausedRunTime = playTime.text.split("/")
 getJustTheSeconds = getPausedRunTime[0].split(":")
 currentPlayTime = int(getJustTheSeconds[1])
-print(str(currentPlayTime))
+print("Playhead Time: " + str(currentPlayTime))
 #grab Screen shot of the vspa page
 driver.get_screenshot_as_file("screenshot.png")
 theImage = Image.open(r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/screenshot.png") 
@@ -57,14 +57,14 @@ pytesseract.pytesseract.tesseract_cmd = r'C:/Users/chanse.strode/Documents/tesse
 #get the image and convert it to text
 readTheImageTime = pytesseract.image_to_string("C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/croppedImage.png")
 convertedImageTime = int(float(readTheImageTime))
-print(str(convertedImageTime))
+print("Displayed Time: " + str(convertedImageTime))
 
 #check to see if the player has played at least 10 seconds
 if currentPlayTime >= 10:
     print("Played at least 10 seconds!")
     
     playTimeDifference = currentPlayTime - convertedImageTime
-    print(str(playTimeDifference))
+    print("Difference in Seconds: " + str(playTimeDifference))
     #Check to see if play head time and whats on the screen is within 1 second
     if abs(playTimeDifference) >= 2:
         print("ERROR: The difference between the playhead time and displayed time is greater than 1 second:")
