@@ -75,6 +75,5 @@ if currentPlayTime >= 10:
 
 else:
     print("ERROR: The video did not play more than 10 seconds!")
-    print("I bet this was Andy's fault!")
 
 driver.close()
