@@ -8,7 +8,7 @@ import time
 import datetime
 
 loginURL = "https://master.thorhudl.com/login"
-videoSpaURL = "https://master.thorhudl.com/watch/video/VmlkZW81ZjBjNzY3MTdjMGE1YjYxY2NiOTY2NWE=/organizer"
+videoSpaURL = "https://master.thorhudl.com/watch/video/VmlkZW81ZjBjYTEyYjdjMGE1YjYxY2NiOTcxMzY=/organizer"
 windowsReadTheImagePath = "C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/croppedImage.png"
 
 ##login
@@ -38,18 +38,17 @@ currentPlayTime = int(getJustTheSeconds[1])
 print("Playhead Time: " + str(currentPlayTime))
 #grab Screen shot of the vspa page
 driver.get_screenshot_as_file("screenshot.png")
-theImage = Image.open(windowsImagePath) 
+theImage = Image.open(r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/screenshot.png") 
 
 
 width, height = theImage.size
 print(width,height)
 # Setting the points in pixels for cropped image. If we force the browser size we can use this approach. 
 #number of pixels starting from the left side of the screen. the more you add the further RIGHT it goes.
-windowsLeft = 630  
-#N.O.P starting from the top of the screen. the more you add the further DOWN it goes.
-windowsTop = 350  
-windowRight = 870 
-windowsBottom = 830
+windowsLeft = 250  
+windowsTop = 200  
+windowRight = 600
+windowsBottom = 400
     
 # Cropped image of above dimension 
 # (It will not change orginal image) 
@@ -61,26 +60,22 @@ cropTheImage.save("croppedImage.png")
 pytesseract.pytesseract.tesseract_cmd = r'C:/Users/chanse.strode/Documents/tesseract/tesseract'
 
 #get the image and convert it to text
-readTheImageTime = pytesseract.image_to_string(r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/screenshot.png")
+readTheImageTime = pytesseract.image_to_string("C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/croppedImage.png")
 print(str(readTheImageTime))
-convertedImageTime = int(readTheImageTime)
+getNumber = readTheImageTime[0] #gets the first character in the string
+print(getNumber)
+convertedImageTime = int(getNumber)
 print("Displayed Time: " + str(convertedImageTime))
 
 #check to see if the player has played at least 10 seconds
-if currentPlayTime >= 10:
-    print("Played at least 10 seconds!")
-    
-    playTimeDifference = currentPlayTime - convertedImageTime
-    print("Difference in Seconds: " + str(playTimeDifference))
-    #Check to see if play head time and whats on the screen is within 1 second
-    if abs(playTimeDifference) >= 2:
-        print("ERROR: The difference between the playhead time and displayed time is greater than 1 second:")
-        print("Playhead Time: " + str(currentPlayTime))
-        print("Displayed Time: " + str(convertedImageTime))
-    else:
-        print("SUCCESS! TEST PASSED!")
-
+playTimeDifference = currentPlayTime - convertedImageTime
+print("Difference in Seconds: " + str(playTimeDifference))
+#Check to see if play head time and whats on the screen is within 1 second
+if abs(playTimeDifference) >= 2:
+    print("ERROR: The difference between the playhead time and displayed time is greater than 1 second:")
+    print("Playhead Time: " + str(currentPlayTime))
+    print("Displayed Time: " + str(convertedImageTime))
 else:
-    print("ERROR: The video did not play more than 10 seconds!")
+    print("SUCCESS! TEST PASSED!")
 
 driver.close()
