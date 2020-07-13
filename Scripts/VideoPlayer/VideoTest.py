@@ -10,6 +10,8 @@ import datetime
 loginURL = "https://master.thorhudl.com/login"
 videoSpaURL = "https://master.thorhudl.com/watch/video/VmlkZW81ZjBjNzY3MTdjMGE1YjYxY2NiOTY2NWE=/organizer"
 windows = r'C:/Users/chanse.strode/Documents/tesseract/tesseract'
+windowsImagePath = r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/screenshot.png"
+windowsReadTheImagePath = "C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/croppedImage.png"
 
 ##login
 driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -38,10 +40,9 @@ currentPlayTime = int(getJustTheSeconds[1])
 print("Playhead Time: " + str(currentPlayTime))
 #grab Screen shot of the vspa page
 driver.get_screenshot_as_file("screenshot.png")
-theImage = Image.open(r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/screenshot.png") 
+theImage = Image.open(windowsImagePath) 
 
-#width, height = theImage.size
-#print(width,height)
+
 # Setting the points in pixels for cropped image. If we force the browser size we can use this approach. 
 left = 830
 top = 600
@@ -58,7 +59,7 @@ cropTheImage.save("croppedImage.png")
 pytesseract.pytesseract.tesseract_cmd = windows
 
 #get the image and convert it to text
-readTheImageTime = pytesseract.image_to_string("C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/croppedImage.png")
+readTheImageTime = pytesseract.image_to_string(windowsReadTheImagePath)
 convertedImageTime = int(float(readTheImageTime))
 print("Displayed Time: " + str(convertedImageTime))
 
