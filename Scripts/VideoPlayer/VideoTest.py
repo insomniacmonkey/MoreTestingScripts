@@ -9,8 +9,6 @@ import datetime
 
 loginURL = "https://master.thorhudl.com/login"
 videoSpaURL = "https://master.thorhudl.com/watch/video/VmlkZW81ZjBjNzY3MTdjMGE1YjYxY2NiOTY2NWE=/organizer"
-windows = r'C:/Users/chanse.strode/Documents/tesseract/tesseract'
-windowsImagePath = r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/screenshot.png"
 windowsReadTheImagePath = "C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/croppedImage.png"
 
 ##login
@@ -60,12 +58,12 @@ cropTheImage = theImage.crop((windowsLeft, windowsTop, windowRight, windowsBotto
 # Shows the image in image viewer 
 cropTheImage.save("croppedImage.png") 
 # navigate to pytesseract exe location
-pytesseract.pytesseract.tesseract_cmd = windows
+pytesseract.pytesseract.tesseract_cmd = r'C:/Users/chanse.strode/Documents/tesseract/tesseract'
 
 #get the image and convert it to text
-readTheImageTime = pytesseract.image_to_string(windowsReadTheImagePath)
+readTheImageTime = pytesseract.image_to_string(r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/screenshot.png")
 print(str(readTheImageTime))
-convertedImageTime = int(float(readTheImageTime))
+convertedImageTime = int(readTheImageTime)
 print("Displayed Time: " + str(convertedImageTime))
 
 #check to see if the player has played at least 10 seconds
