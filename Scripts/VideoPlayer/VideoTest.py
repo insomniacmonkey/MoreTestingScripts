@@ -44,14 +44,16 @@ theImage = Image.open(windowsImagePath)
 
 
 # Setting the points in pixels for cropped image. If we force the browser size we can use this approach. 
-left = 830
-top = 600
-right = 1170
-bottom = 830
+#number of pixels starting from the left side of the screen. the more you add the further RIGHT it goes.
+windowsLeft = 630  
+#N.O.P starting from the top of the screen. the more you add the further DOWN it goes.
+windowsTop = 350  
+windowRight = 870 
+windowsBottom = 830
     
 # Cropped image of above dimension 
 # (It will not change orginal image) 
-cropTheImage = theImage.crop((left, top, right, bottom)) 
+cropTheImage = theImage.crop((windowsLeft, windowsTop, windowRight, windowsBottom)) 
     
 # Shows the image in image viewer 
 cropTheImage.save("croppedImage.png") 
@@ -60,6 +62,7 @@ pytesseract.pytesseract.tesseract_cmd = windows
 
 #get the image and convert it to text
 readTheImageTime = pytesseract.image_to_string(windowsReadTheImagePath)
+print(str(readTheImageTime))
 convertedImageTime = int(float(readTheImageTime))
 print("Displayed Time: " + str(convertedImageTime))
 
