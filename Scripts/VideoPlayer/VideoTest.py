@@ -8,11 +8,13 @@ import time
 import datetime
 
 loginURL = "https://master.thorhudl.com/login"
-videoSpaURL = "https://master.thorhudl.com/watch/video/VmlkZW81ZWZhMjJhYTE4MTc0MjBkZTg3MTg5ZWE=/organizer"
+videoSpaURL = "https://master.thorhudl.com/watch/video/VmlkZW81ZjBjNzY3MTdjMGE1YjYxY2NiOTY2NWE=/organizer"
 windows = r'C:/Users/chanse.strode/Documents/tesseract/tesseract'
 
 ##login
 driver = webdriver.Chrome(ChromeDriverManager().install())
+driver.set_window_position(0, 0)
+driver.set_window_size(1200, 700)
 driver.get(loginURL)
 time.sleep(1)
 emailField = driver.find_element_by_id("email")
@@ -24,7 +26,7 @@ passwordField.submit()
 ##Load Video Spa Page
 driver.get(videoSpaURL)
 #let the player play for 15 seconds. This has to be a number that doesn't have a "0" in it due to image text conversion below. 
-time.sleep(15)
+time.sleep(5)
 #pause player
 pauseButton = driver.find_element_by_xpath("//*[@data-qa-id='vi-controls-playpause']")
 pauseButton.click()
