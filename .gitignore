@@ -12,3 +12,6 @@ Scripts/Drift/password.py
 Scripts/Drift/debug.log
 Scripts/Drift/__pycache__/urls.cpython-38.pyc
 Scripts/VideoPlayer/password.py
+Scripts/VideoPlayer/__pycache__/password.cpython-38.pyc
+Scripts/VideoPlayer/croppedImage.png
+Scripts/VideoPlayer/screenshot.png

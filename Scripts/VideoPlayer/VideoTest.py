@@ -8,7 +8,8 @@ import time
 import datetime
 
 loginURL = "https://master.thorhudl.com/login"
-videoSpaURL = "https://master.thorhudl.com/watch/video/VmlkZW81ZWU4Mzg4ZTdjMGE1YjQzMjAyMWI0OGU=/organizer"
+videoSpaURL = "https://master.thorhudl.com/watch/video/VmlkZW81ZWZhMjJhYTE4MTc0MjBkZTg3MTg5ZWE=/organizer"
+windows = r'C:/Users/chanse.strode/Documents/tesseract/tesseract'
 
 ##login
 driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -52,7 +53,7 @@ cropTheImage = theImage.crop((left, top, right, bottom))
 # Shows the image in image viewer 
 cropTheImage.save("croppedImage.png") 
 # navigate to pytesseract exe location
-pytesseract.pytesseract.tesseract_cmd = r'C:/Users/chanse.strode/Documents/tesseract/tesseract'
+pytesseract.pytesseract.tesseract_cmd = windows
 
 #get the image and convert it to text
 readTheImageTime = pytesseract.image_to_string("C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/croppedImage.png")
