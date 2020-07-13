@@ -43,6 +43,8 @@ driver.get_screenshot_as_file("screenshot.png")
 theImage = Image.open(windowsImagePath) 
 
 
+width, height = theImage.size
+print(width,height)
 # Setting the points in pixels for cropped image. If we force the browser size we can use this approach. 
 #number of pixels starting from the left side of the screen. the more you add the further RIGHT it goes.
 windowsLeft = 630  
