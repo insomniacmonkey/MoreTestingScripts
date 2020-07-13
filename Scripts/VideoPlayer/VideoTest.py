@@ -36,6 +36,10 @@ getPausedRunTime = playTime.text.split("/")
 getJustTheSeconds = getPausedRunTime[0].split(":")
 currentPlayTime = int(getJustTheSeconds[1])
 print("Playhead Time: " + str(currentPlayTime))
+
+FullScreenButton = driver.find_element_by_xpath("//*[@data-qa-id='vi-controls-fullscreen']")
+FullScreenButton.click()
+time.sleep(1)
 #grab Screen shot of the vspa page
 driver.get_screenshot_as_file("screenshot.png")
 theImage = Image.open(r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/screenshot.png") 
@@ -45,10 +49,11 @@ width, height = theImage.size
 print(width,height)
 # Setting the points in pixels for cropped image. If we force the browser size we can use this approach. 
 #number of pixels starting from the left side of the screen. the more you add the further RIGHT it goes.
-windowsLeft = 250  
-windowsTop = 200  
-windowRight = 600
-windowsBottom = 400
+windowsLeft = 0
+windowsTop = 100
+windowRight = width
+windowsBottom = height
+
     
 # Cropped image of above dimension 
 # (It will not change orginal image) 
