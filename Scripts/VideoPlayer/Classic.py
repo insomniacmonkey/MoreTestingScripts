@@ -26,7 +26,7 @@ passwordField.submit()
 ##Load Video Spa Page
 driver.get(classicLib)
 time.sleep(3)
-clickOnTheVideo =  driver.find_element_by_xpath("//*[@id='cutup_47576978']")
+clickOnTheVideo =  driver.find_element_by_xpath("//*[@id='cutup_47611429']")
 clickOnTheVideo.click()
 #let the player play for 5 seconds. This has to be a number that doesn't have a "0" in it due to image text conversion below. 
 time.sleep(5)
@@ -49,7 +49,6 @@ theImage = Image.open(r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScrip
 
 
 width, height = theImage.size
-print(width,height)
 # Setting the points in pixels for cropped image. If we force the browser size we can use this approach. 
 #number of pixels starting from the left side of the screen. the more you add the further RIGHT it goes.
 windowsLeft = 0
@@ -69,9 +68,7 @@ pytesseract.pytesseract.tesseract_cmd = r'C:/Users/chanse.strode/Documents/tesse
 
 #get the image and convert it to text
 readTheImageTime = pytesseract.image_to_string("C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/croppedImage.png")
-print(str(readTheImageTime))
 getNumber = readTheImageTime[0] #gets the first character in the string
-print(getNumber)
 convertedImageTime = int(getNumber)
 print("Displayed Time: " + str(convertedImageTime))
 

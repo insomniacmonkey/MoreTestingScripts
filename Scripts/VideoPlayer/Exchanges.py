@@ -44,9 +44,7 @@ time.sleep(1)
 driver.get_screenshot_as_file("screenshot.png")
 theImage = Image.open(r"C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/screenshot.png") 
 
-
 width, height = theImage.size
-print(width,height)
 # Setting the points in pixels for cropped image. If we force the browser size we can use this approach. 
 #number of pixels starting from the left side of the screen. the more you add the further RIGHT it goes.
 windowsLeft = 400
@@ -54,7 +52,6 @@ windowsTop = 200
 windowRight = width
 windowsBottom = height - 50
 
-    
 # Cropped image of above dimension 
 # (It will not change orginal image) 
 cropTheImage = theImage.crop((windowsLeft, windowsTop, windowRight, windowsBottom)) 
@@ -66,9 +63,7 @@ pytesseract.pytesseract.tesseract_cmd = r'C:/Users/chanse.strode/Documents/tesse
 
 #get the image and convert it to text
 readTheImageTime = pytesseract.image_to_string("C:/Users/chanse.strode/Documents/GitHub/MoreTestingScripts/Scripts/VideoPlayer/croppedImage.png")
-print(str(readTheImageTime))
 getNumber = readTheImageTime[0] #gets the first character in the string
-print(getNumber)
 convertedImageTime = int(getNumber)
 print("Displayed Time: " + str(convertedImageTime))
 
