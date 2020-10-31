@@ -1,5 +1,5 @@
 from env import *
-from urls import *
+from sourcevideo import *
 from steps import *
 import datetime
 
@@ -7,28 +7,24 @@ import datetime
 global count
 count = 0
 
-for videoSrc in url:
+for manifestFile in videoData:
     driver = webdriver.Chrome()
     driver.get(thorenv)
     driver.set_window_size(1024, 768)
     time.sleep(1)
     count +=1
     #Load stream info
-    loadStream(driver,videoSrc)
-
+    loadStream(driver,manifestFile,count)
     #initialzing values so the first while loop runs
     driftTime = 0
     msToSeconds = 0
-    
+    #Do first time check
     currentTimeString = firstTimeCheck(driver)
     time.sleep(2)
     currentTimeSecondCheckString = firstTimeCheck(driver)
-
-    
     #Get drift and convert from ms to seconds
-    printCurrentResults(driver,currentTimeString,currentTimeSecondCheckString,count)
-
-    #log a message depending on playback completion 
-    printFinalResults(driver,currentTimeString)
-    #TODO (Add ammount of drift compared to total video length)
+    biggestDriftInSeconds = printCurrentResults(driver,currentTimeString,currentTimeSecondCheckString)
+    #Write output to csv
+    list_of_elem = generateFinalResults(driver,manifestFile,biggestDriftInSeconds,count)
+    append_list_as_row('DriftOutput.csv', list_of_elem)
     driver.close()
