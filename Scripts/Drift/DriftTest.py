@@ -6,7 +6,7 @@ import datetime
 #Sets the count so we know how many files we run through
 global count
 count = 0
-
+deleteOldFile()
 for manifestFile in videoData:
     driver = webdriver.Chrome()
     driver.get(thorenv)

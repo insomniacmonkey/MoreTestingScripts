@@ -5,8 +5,14 @@ from env import *
 from selenium.webdriver.common.keys import Keys
 from csv import writer
 from sourcevideo import *
+import os
 
-#Get current Time
+def deleteOldFile():
+    #Delete the DriftOutput.csv if it exist
+    if os.path.exists("DriftOutput.csv"):
+        print("Deleting old DriftOutput.csv file")
+        os.remove("DriftOutput.csv")
+
 def firstTimeCheck(driver):
     currentTime = int(float(driver.execute_script("return document.getElementById('player-current-time').value;")))
     if(currentTime == ""):
