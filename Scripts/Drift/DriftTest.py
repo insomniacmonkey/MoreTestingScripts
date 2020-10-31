@@ -6,7 +6,9 @@ import datetime
 #Sets the count so we know how many files we run through
 global count
 count = 0
+DriftOutputCSV = "DriftOutput.csv"
 deleteOldFile()
+createDriftOutputCSV(DriftOutputCSV)
 for manifestFile in videoData:
     driver = webdriver.Chrome()
     driver.get(thorenv)
@@ -26,5 +28,6 @@ for manifestFile in videoData:
     biggestDriftInSeconds = printCurrentResults(driver,currentTimeString,currentTimeSecondCheckString)
     #Write output to csv
     list_of_elem = generateFinalResults(driver,manifestFile,biggestDriftInSeconds,count)
-    append_list_as_row('DriftOutput.csv', list_of_elem)
+    append_list_as_row(DriftOutputCSV, list_of_elem)
     driver.close()
+    

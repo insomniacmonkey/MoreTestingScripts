@@ -13,6 +13,14 @@ def deleteOldFile():
         print("Deleting old DriftOutput.csv file")
         os.remove("DriftOutput.csv")
 
+def createDriftOutputCSV(DriftOutputCSV):
+    with open(DriftOutputCSV, 'a+', newline='') as write_obj:
+        # Create a writer object from csv module
+        csv_writer = writer(write_obj)
+        # Add contents of list as last row in the csv file
+        headerRow = ["Time at Run","Drift In Seconds","P/F","Final Play Time","P/F","Biggest Drift","P/F", "Name of Video", "Admin Link", "Type","Manifest URL"]
+        csv_writer.writerow(headerRow)
+
 def firstTimeCheck(driver):
     currentTime = int(float(driver.execute_script("return document.getElementById('player-current-time').value;")))
     if(currentTime == ""):
@@ -69,13 +77,12 @@ def generateFinalResults(driver,manifestFile,biggestDriftInSeconds,count):
         maxDriftStatus = "Fail"
     else:
         maxDriftStatus = "Pass"
-    # "Time at Run","Drift In Seconds","P/F","Final Play Time","P/F","Biggest Drift","P/F", "Name of Video", "Admin Link", "Type","Manifest URL"
     timeAtFinish = datetime.now()
     return [str(timeAtFinish),currentDriftInSeconds,driftStatus,finalTime,finalTimeStatus,str(biggestDriftInSeconds),maxDriftStatus,manifestFile[1],manifestFile[2],manifestFile[3],manifestFile[0]]
 
-def append_list_as_row(file_name, list_of_elem):
+def append_list_as_row(DriftOutputCSV, list_of_elem):
     # Open file in append mode
-    with open(file_name, 'a+', newline='') as write_obj:
+    with open(DriftOutputCSV, 'a+', newline='') as write_obj:
         # Create a writer object from csv module
         csv_writer = writer(write_obj)
         # Add contents of list as last row in the csv file
